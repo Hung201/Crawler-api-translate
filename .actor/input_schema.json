@@ -1,0 +1,45 @@
+{
+    "title": "Daisan Alibaba",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "shopUrl": {
+            "title": "Shop URL",
+            "type": "string",
+            "description": "Shop URL.",
+            "editor": "textfield",
+            "prefill": "https://demaxlt.en.alibaba.com"
+        },
+        "pageStart": {
+            "title": "Page start",
+            "type": "integer",
+            "description": "Page number to start crawl.",
+            "default": 1
+        },
+        "pageEnd": {
+            "title": "Page end",
+            "type": "integer",
+            "description": "Page number to end crawl.",
+            "default": 20
+        },
+        "delayMin": {
+            "title": "Delay min (ms)",
+            "type": "integer",
+            "description": "Min delay between each request.",
+            "default": 500
+        },
+        "delayMax": {
+            "title": "Delay max (ms)",
+            "type": "integer",
+            "description": "Max delay between each request.",
+            "default": 1000
+        },
+        "maxRequestsPerCrawl": {
+            "title": "Max Requests per Crawl",
+            "type": "integer",
+            "description": "Maximum number of requests that can be made by this crawler.",
+            "default": 50000
+        }
+    },
+    "required": ["shopUrl"]
+}
