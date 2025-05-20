@@ -1,0 +1,8 @@
+{
+    "shopUrl": "https://angsibike.en.alibaba.com/",
+    "pageStart": 1,
+    "pageEnd": 5,
+    "delayMin": 400,
+    "delayMax": 1000,
+    "maxRequestsPerCrawl": 100
+}

@@ -48,7 +48,7 @@ const addNextProductList = async (enqueueLinks, request) => {
         });
 
         state.page += 1;
-    }    
+    }
 };
 
 router.addDefaultHandler(async ({ request, enqueueLinks, log }) => {
@@ -69,7 +69,7 @@ router.addHandler('product-list', async ({ request, enqueueLinks, $, log }) => {
 
         await findProductLinks(enqueueLinks, productListUrl);
     }
-    catch(err) {
+    catch (err) {
     }
 
     await addNextProductList(enqueueLinks, request);
@@ -85,7 +85,7 @@ router.addHandler('description', async ({ request, json, log, pushData }) => {
         destProduct.content = formatContent(htmlDescription);
         pushData(destProduct);
     }
-    catch(err) {
+    catch (err) {
     }
 
     await sleep(createRandomSleep(config.delayMin, config.delayMax));
@@ -101,11 +101,11 @@ router.addHandler('detail', async ({ request, enqueueLinks, $, log }) => {
 
         const $scriptDataElement = $('#layout-other').next();
         let dataMatch = /window\.detailData\s*=\s*(.+?);\s*window\.detailData/s.exec($scriptDataElement.text());
-        
+
         // console.timeEnd('parse');
 
         if (dataMatch) {
-            
+
             const detailData = JSON.parse(dataMatch[1]);
             const destProduct = getProductData(url, $, detailData);
 
@@ -124,7 +124,7 @@ router.addHandler('detail', async ({ request, enqueueLinks, $, log }) => {
         }
     }
 
-    catch(err) {
+    catch (err) {
     }
 
     await sleep(createRandomSleep(config.delayMin, config.delayMax));

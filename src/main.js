@@ -7,11 +7,14 @@ import { CheerioCrawler } from 'crawlee';
 
 import { getBaseUrl, getDomain } from './helpers/crawler-helper.js';
 import { router, config } from './routes.js';
+import fs from 'fs';
 
 // The init() call configures the Actor for its environment. It's recommended to start every Actor with an init()
 await Actor.init();
 
-// Structure of input is defined in input_schema.json
+// Read input from input.json file
+const input = JSON.parse(fs.readFileSync('./input.json', 'utf8'));
+
 const {
     shopUrl,
     pageStart = 1,
@@ -19,7 +22,7 @@ const {
     delayMin = 500,
     delayMax = 1000,
     maxRequestsPerCrawl = 50000,
-} = await Actor.getInput() ?? {};
+} = input;
 
 const startApp = () => {
     config.pageStart = pageStart;
@@ -34,6 +37,9 @@ const startApp = () => {
 
 startApp();
 
+// Create a dataset to store the crawled data
+const dataset = await Actor.openDataset();
+
 const proxyConfiguration = await Actor.createProxyConfiguration();
 
 const crawler = new CheerioCrawler({
@@ -45,6 +51,9 @@ const crawler = new CheerioCrawler({
     minConcurrency: 1,
     maxConcurrency: 1
 });
+
+// Log the dataset ID for reference
+console.log(`Dataset ID: ${dataset.id}`);
 
 await crawler.run([config.baseUrl]);
 
